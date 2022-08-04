@@ -1,0 +1,33 @@
+SELECT DOCID 
+        FROM IASDOCHEAD 
+        WHERE CLIENT =SYS_CLIENT 
+                AND COMPANY ='IAS' 
+                AND  DOCTYPE = 'IASKP' 
+                AND OKKDOCID=TBLARAC_DOCNUM 
+        INTO TMPDOC;
+
+DOCTEXT='';
+TBLARAC_DOCSTEXT='';
+
+LOOP AT TMPDOC 
+BEGIN
+        SELECT STEXT 
+                FROM IASDOCITEM 
+                WHERE CLIENT =SYS_CLIENT 
+                        AND COMPANY ='OKK' 
+                        AND  DOCTYPE = 'OKTKP' 
+                        AND  DOCID = TMPDOC_DOCID 
+                ORDERBY DOCPOS DESC 
+                INTO TMPDOCX;
+
+
+        LOOP AT TMPDOCX 
+        BEGIN
+                DOCTEXT = TRIM(DOCTEXT);
+                TMPDOCX_STEXT=TRIM(TMPDOCX_STEXT);
+                DOCTEXT = TMPDOCX_STEXT + ' | ' +  DOCTEXT;
+        ENDLOOP;
+
+ENDLOOP;
+
+MOVE DOCTEXT TO TBLARAC_DOCSTEXT;
