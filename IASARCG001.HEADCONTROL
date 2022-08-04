@@ -9,7 +9,6 @@ ENDIF;
 
 SWITCH IASARACHEAD_ARACTIPI 
 CASE 2:
-	/*Semi Treyler*/
 
 	IF IASARACHEAD_URETICI == '' THEN
 		MESSAGE IAS E0 WITH 'Lütfen üretici firma seçiniz';
@@ -49,7 +48,6 @@ CASE 2:
 	ENDIF;
 
 CASE 4:
-	/*Üst Yapı*/
 
 	IF IASARACHEAD_URETICI == '' THEN
 		MESSAGE IAS E0 WITH 'Lütfen üretici firma seçiniz';
